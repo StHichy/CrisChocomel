@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 
 class Produto extends Model
 {
@@ -18,21 +17,20 @@ class Produto extends Model
     ];
 
     /**
-     * Retorna a URL da imagem de forma segura, evitando erros de S3 vazio.
+     * Retorna a URL pública correta do Supabase para exibição no navegador.
      */
     public function getImagemAttribute($value)
     {
-        // Se estiver vazio, retorna null
         if (empty($value)) {
             return null;
         }
 
-        // Se já for uma URL completa (ex: link direto do Supabase), retorna ela
+        // Se já for uma URL completa, retorna ela mesma
         if (filter_var($value, FILTER_VALIDATE_URL)) {
             return $value;
         }
 
-        // Caso seja apenas o caminho relativo, gera a URL pública com segurança
-        return Storage::disk('s3')->url($value);
+        // Monta a URL pública padrão do Supabase (object/public)
+        return "https://knwaqlmmlvapbjntsftp.supabase.co/storage/v1/object/public/produtos/" . $value;
     }
 }

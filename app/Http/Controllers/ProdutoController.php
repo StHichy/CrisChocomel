@@ -90,16 +90,14 @@ class ProdutoController extends Controller
         ]);
 
         if ($request->hasFile('imagem')) {
-            // Em vez de usar 'produtos', envie o arquivo diretamente sem subpasta, 
-            // ou pegue apenas o nome base do arquivo gerado:
             $file = $request->file('imagem');
             $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
             
-            // Salva diretamente na raiz do bucket 'produtos'
+            // Salva no bucket S3 e guarda apenas o nome/caminho relativo
             $path = $file->storeAs('', $filename, 's3');
             
             if (!empty($path)) {
-                $dados['imagem'] = Storage::disk('s3')->url($path);
+                $dados['imagem'] = $path; // Salva apenas "nome-da-foto.png"
             }
         }
 
@@ -131,10 +129,14 @@ class ProdutoController extends Controller
         ]);
 
         if ($request->hasFile('imagem')) {
-            $path = $request->file('imagem')->store('produtos', 's3');
+            $file = $request->file('imagem');
+            $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            
+            // Salva no bucket S3 e guarda apenas o nome/caminho relativo
+            $path = $file->storeAs('', $filename, 's3');
             
             if (!empty($path)) {
-                $dados['imagem'] = Storage::disk('s3')->url($path);
+                $dados['imagem'] = $path; // Salva apenas "nome-da-foto.png"
             }
         }
 
