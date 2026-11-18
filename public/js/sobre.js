@@ -4,8 +4,8 @@
 const { $, art, byId, reveal } = CC;
 $("#aboutArt2").innerHTML = art(byId("pm-bb"), { bg: false });
 const vals = [
-  ["Mel 100% puro", "Florada pura de apicultores parceiros, sem xaropes artificiais."],
-  ["Afeto em cada caixa", "Embalagens pensadas para emocionar, com laços e cartinhas feitas à mão."],
+  ["Ingredientes de Qualidade", "Todos os ingredientes são escolhidos pensando em cada cliente"],
+  ["Amor em cada pedaço", "Todos os produtos são feitos com amor e carinhho pela CrisChocomel e sua equipe "],
   ["Produção artesanal", "Lotes pequenos para cada doce sair do forno com frescor e textura impecáveis."],
   ["Transparência total", "Relação próxima e direta com os clientes pelo WhatsApp."]
 ];

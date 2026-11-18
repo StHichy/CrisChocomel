@@ -102,7 +102,7 @@
     <div class="container position-relative" style="z-index:2">
       <span class="pill">Confeitaria afetiva desde o primeiro pão de mel</span>
       <h1 class="mt-3 mb-3">Nossa doce história e propósito</h1>
-      <p class="lead-s">Como um sonho caseiro de levar afeto em forma de pão de mel se transformou na Cris Chocomel, conquistando centenas de famílias.</p>
+      <p class="lead-s">Como um sonho caseiro de levar afeto em forma de pão de mel se transformou na Cris Chocomel</p>
     </div>
   </div>
   <div class="drip-wrap" aria-hidden="true"><svg class="drip-svg" viewBox="0 0 1200 110" preserveAspectRatio="xMidYMin meet"></svg></div>
@@ -133,7 +133,7 @@
 <footer class="footer">
   <div class="container">
     <div class="row g-4">
-      <div class="col-md-5"><a class="brand mb-3"<a href="{{ route('index') }}"><span class="brand-name">Cris <span>chocomel</span></span></a><p class="mb-0">Feito à mão com muito carinho. Pães de mel, brigadeiros gourmet, cones trufados e caixas de presente.</p></div>
+      <div class="col-md-5"><a class="brand mb-3"<a href="{{ route('index') }}"><span class="brand-name">Cris <span>chocomel</span></span></a><p class="mb-0">Feito à mão com muito carinho.</p></div>
       <div class="col-6 col-md-3"><h3 class="h6 text-uppercase" style="letter-spacing:.14em;font-family:var(--f-body);color:var(--on-hero)">Navegue</h3><div class="d-grid gap-1"><a<a href="{{ route('index') }}">Início</a><a href="{{ route('produtos') }}">Produtos</a><a href="{{ route('sobre') }}">Sobre a loja</a><a href="{{ route('carrinho') }}">Sacola</a><a href="{{ route('login') }}">Entrar</a><a href="{{ route('register') }}">Criar conta</a></div></div>
       <div class="col-6 col-md-4"><h3 class="h6 text-uppercase" style="letter-spacing:.14em;font-family:var(--f-body);color:var(--on-hero)">Pedidos</h3><p>Confirmação pelo WhatsApp.</p><a class="btn btn-honey btn-sm wa-link" href="https://wa.me/15988081803" target="_blank" rel="noopener">Falar no WhatsApp</a></div>
     </div>
