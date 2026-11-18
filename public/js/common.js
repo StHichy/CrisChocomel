@@ -6,7 +6,7 @@
 /* ===== configuração ===== */
 /* Número do WhatsApp da Cris com código do país e DDD, só dígitos. Ex.: "5511999999999".
    Vazio: o WhatsApp abre para a pessoa escolher o contato. */
-const WHATSAPP = "";
+const WHATSAPP = "5515988081803";
 
 /* ===== utilidades ===== */
 const $ = (s, r = document) => r.querySelector(s);
