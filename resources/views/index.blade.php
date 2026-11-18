@@ -170,6 +170,50 @@
     .cat-carousel-item { flex: 0 0 74%; min-width: 205px; }
     .cat-nav-btn { display: none; }
   }
+
+  /* Animação de flutuação e pulso na personagem e no fundo */
+  .cris-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  /* Elemento animado de fundo (Glow/Halo de mel pulsante) */
+  .honey-glow-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 360px;
+    height: 360px;
+    background: radial-gradient(circle, rgba(229, 158, 0, 0.35) 0%, rgba(229, 158, 0, 0.05) 70%, transparent 100%);
+    border-radius: 50%;
+    z-index: 1;
+    animation: pulseGlow 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulseGlow {
+    0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.7; }
+    100% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+  }
+
+  /* Imagem da Cris com animação contínua (flutuação suave) */
+  .cris-animated-img {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: auto;
+    max-height: 520px;
+    object-fit: contain;
+    filter: drop-shadow(0 15px 25px rgba(44, 23, 8, 0.25));
+    animation: floatCris 5s ease-in-out infinite;
+  }
+
+  @keyframes floatCris {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
 </style>
 </head>
 <body data-page="index">
@@ -277,25 +321,28 @@
           </div>
         </div>
         
-        <!-- Personagem isolada substituindo a animação antiga -->
+        <!-- Personagem maior, ocupando espaço vertical, com elemento animado atrás (Glow) e animação de flutuação -->
         <div class="col-lg-5 text-center">
-          <div class="position-relative d-inline-block w-100" style="max-width: 440px;">
-            <img src="{{ asset('/cris-personagem.png') }}" alt="Cris Chocomel" class="img-fluid rounded-4 shadow-lg" style="border: 3px solid rgba(229,158,0,0.4);">
+          <div class="cris-container">
+            <div class="honey-glow-bg"></div>
+            <img src="{{ asset('/cris-personagem.png') }}" alt="Cris Chocomel" class="cris-animated-img">
           </div>
         </div>
 
       </div>
 
-      <!-- Abelhas originais mantidas voando -->
+      <!-- Abelhas animadas voando ao redor -->
       <svg class="bee" style="top:5%;left:64%" viewBox="0 0 46 40" aria-hidden="true"><ellipse class="wing" cx="17" cy="9" rx="8" ry="10" fill="#FFF4DC" opacity=".85" transform="rotate(-20 17 9)"/><ellipse class="wing" cx="29" cy="9" rx="8" ry="10" fill="#FFF4DC" opacity=".85" transform="rotate(20 29 9)"/><ellipse cx="23" cy="26" rx="15" ry="11" fill="#E59E00"/><path d="M17 16v20M24 15v22M31 16v20" stroke="#2C1708" stroke-width="4"/><circle cx="35" cy="22" r="1.8" fill="#2C1708"/></svg>
       <svg class="bee b2" style="top:80%;left:50%" viewBox="0 0 46 40" aria-hidden="true"><ellipse class="wing" cx="17" cy="9" rx="8" ry="10" fill="#FFF4DC" opacity=".85" transform="rotate(-20 17 9)"/><ellipse class="wing" cx="29" cy="9" rx="8" ry="10" fill="#FFF4DC" opacity=".85" transform="rotate(20 29 9)"/><ellipse cx="23" cy="26" rx="15" ry="11" fill="#E59E00"/><path d="M17 16v20M24 15v22M31 16v20" stroke="#2C1708" stroke-width="4"/><circle cx="35" cy="22" r="1.8" fill="#2C1708"/></svg>
+      <svg class="bee b3" style="top:25%;left:15%" viewBox="0 0 46 40" aria-hidden="true"><ellipse class="wing" cx="17" cy="9" rx="8" ry="10" fill="#FFF4DC" opacity=".85" transform="rotate(-20 17 9)"/><ellipse class="wing" cx="29" cy="9" rx="8" ry="10" fill="#FFF4DC" opacity=".85" transform="rotate(20 29 9)"/><ellipse cx="23" cy="26" rx="15" ry="11" fill="#E59E00"/><path d="M17 16v20M24 15v22M31 16v20" stroke="#2C1708" stroke-width="4"/><circle cx="35" cy="22" r="1.8" fill="#2C1708"/></svg>
+      <svg class="bee b4" style="top:60%;left:88%" viewBox="0 0 46 40" aria-hidden="true"><ellipse class="wing" cx="17" cy="9" rx="8" ry="10" fill="#FFF4DC" opacity=".85" transform="rotate(-20 17 9)"/><ellipse class="wing" cx="29" cy="9" rx="8" ry="10" fill="#FFF4DC" opacity=".85" transform="rotate(20 29 9)"/><ellipse cx="23" cy="26" rx="15" ry="11" fill="#E59E00"/><path d="M17 16v20M24 15v22M31 16v20" stroke="#2C1708" stroke-width="4"/><circle cx="35" cy="22" r="1.8" fill="#2C1708"/></svg>
     </div>
   </div>
   <div class="drip-wrap" aria-hidden="true"><svg class="drip-svg" viewBox="0 0 1200 110" preserveAspectRatio="xMidYMin meet"></svg></div>
 
   <div class="marquee-wrap" aria-hidden="true"><div class="sec pt-3"><div class="marquee-track" id="marquee"></div></div></div>
 
-  <!-- Destaques da semana vindos do Banco de Dados -->
+  <!-- Destaques da semana -->
   <div class="sec pt-3">
     <div class="container">
       <div class="sec-head rv">
@@ -348,7 +395,7 @@
     </div>
   </div>
 
-  <!-- Carrossel de Categorias do Banco de Dados -->
+  <!-- Carrossel de Categorias -->
   <div class="sec sec-alt">
     <div class="container">
       <div class="sec-head rv">
