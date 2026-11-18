@@ -90,11 +90,11 @@ class ProdutoController extends Controller
         ]);
 
         if ($request->hasFile('imagem')) {
-            // Salva diretamente no bucket do Supabase Storage
             $path = $request->file('imagem')->store('produtos', 's3');
             
-            // Atribui a URL pública gerada pelo Supabase ao array de dados
-            $dados['imagem'] = Storage::disk('s3')->url($path);
+            if (!empty($path)) {
+                $dados['imagem'] = Storage::disk('s3')->url($path);
+            }
         }
 
         $dados['destaque'] = $request->has('destaque');
@@ -125,11 +125,11 @@ class ProdutoController extends Controller
         ]);
 
         if ($request->hasFile('imagem')) {
-            // Salva diretamente no bucket do Supabase Storage
             $path = $request->file('imagem')->store('produtos', 's3');
             
-            // Atribui a URL pública gerada ao array de dados
-            $dados['imagem'] = Storage::disk('s3')->url($path);
+            if (!empty($path)) {
+                $dados['imagem'] = Storage::disk('s3')->url($path);
+            }
         }
 
         $dados['destaque'] = $request->has('destaque');
@@ -143,9 +143,6 @@ class ProdutoController extends Controller
     public function destroy($id)
     {
         $produto = Produto::findOrFail($id);
-
-        // Como agora usamos Supabase Storage, a remoção local antiga foi ignorada. 
-        // Se quiser deletar do Supabase, você pode usar Storage::disk('s3')->delete(...) opcionalmente.
 
         $produto->delete();
 
