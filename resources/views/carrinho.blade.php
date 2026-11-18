@@ -130,7 +130,7 @@
           </div>
 
           <div class="d-grid gap-2">
-            <a class="btn btn-honey btn-lg" target="_blank" rel="noopener" href="{{ $pedidoPronto['waLink'] }}">
+            <a class="btn btn-honey btn-lg" target="_blank" rel="noopener" href="{{ $pedidoPronto['waUrl'] }}">
               <span data-i="chat"></span> Enviar pedido pelo WhatsApp
             </a>
             <a class="btn btn-line" href="{{ route('produtos') }}">Voltar aos produtos</a>
@@ -354,8 +354,20 @@
     const addrBox = document.getElementById('addrBox');
     const freteLabel = document.getElementById('freteLabel');
     const totalLabel = document.getElementById('totalLabel');
-    const base = parseFloat(totalLabel.dataset.base);
-      }
-<scrpit>
+    const base = parseFloat(totalLabel.dataset.base) || 0;
+    const frete = isEntrega ? 12.00 : 0.00;
+
+    // Mostra ou esconde os campos de endereço
+    addrBox.style.display = isEntrega ? 'block' : 'none';
+
+    // Atualiza o texto do frete e do total
+    freteLabel.textContent = isEntrega ? 'R$ 12,00' : 'Grátis';
+    totalLabel.textContent = 'R$ ' + (base + frete).toLocaleString('pt-BR', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    });
+  }
+</script>
 @include('partials.chocomel-alerts')
 </body>
+</html>

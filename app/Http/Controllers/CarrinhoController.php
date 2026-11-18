@@ -148,7 +148,7 @@ class CarrinhoController extends Controller
         $texto .= "\n*Total a pagar: R$ " . number_format($totalFinal, 2, ',', '.') . "*";
 
         // Coloque aqui o número do WhatsApp da loja com 55 + DDD (ex: 5515999999999)
-        $telefoneLoja = "";
+        $telefoneLoja = "5515988081803";
         $waUrl = "https://wa.me/{$telefoneLoja}?text=" . urlencode($texto);
 
         // Limpa o carrinho da sessão após gerar o pedido
