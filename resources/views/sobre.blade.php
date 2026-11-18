@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sobre a loja | Cris Chocomel</title>
 <meta name="description" content="A história da Cris Chocomel e o compromisso com ingredientes puros.">
-<link rel="icon" type="image/png" href="{{ asset('favo-de-mel.png') }}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="icon" type="image/png" href="/favo-de-mel.png?v=3">
+<link rel="shortcut icon" type="image/png" href="/favo-de-mel.png?v=3"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/bootstrap.min.css">
