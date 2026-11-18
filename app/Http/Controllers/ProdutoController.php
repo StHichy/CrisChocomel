@@ -90,7 +90,13 @@ class ProdutoController extends Controller
         ]);
 
         if ($request->hasFile('imagem')) {
-            $path = $request->file('imagem')->store('produtos', 's3');
+            // Em vez de usar 'produtos', envie o arquivo diretamente sem subpasta, 
+            // ou pegue apenas o nome base do arquivo gerado:
+            $file = $request->file('imagem');
+            $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            
+            // Salva diretamente na raiz do bucket 'produtos'
+            $path = $file->storeAs('', $filename, 's3');
             
             if (!empty($path)) {
                 $dados['imagem'] = Storage::disk('s3')->url($path);
