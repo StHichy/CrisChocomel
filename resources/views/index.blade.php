@@ -477,10 +477,16 @@
     </div>
   </div>
 
-  <div class="sec">
+ <div class="sec">
     <div class="container">
       <div class="row g-4 g-lg-5 align-items-center">
-        <div class="col-lg-5 rv"><div class="blob p-4"><div id="aboutArt"></div></div></div>
+        <!-- Espaço para a imagem personalizada -->
+        <div class="col-lg-5 rv">
+          <div class="position-relative overflow-hidden rounded-4 shadow-sm" style="border: 3px solid rgba(229,158,0,0.3);">
+            <img src="{{ asset('img/foto-atelie.jpg') }}" alt="Ateliê Cris Chocomel" class="img-fluid w-100" style="object-fit: cover; height: 380px;">
+          </div>
+        </div>
+
         <div class="col-lg-7 rv">
           <span class="eyebrow">Confeitaria afetiva</span>
           <h2 class="mt-2 mb-3">Mel de verdade, lotes pequenos, zero pressa</h2>
