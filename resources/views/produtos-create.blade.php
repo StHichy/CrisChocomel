@@ -115,7 +115,7 @@
         @endif
 
         <form action="{{ route('produtos.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
+              @csrf
 
             <div class="mb-3">
                 <label for="nome" class="form-label fw-semibold">Nome do Produto *</label>

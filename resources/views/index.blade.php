@@ -310,14 +310,15 @@
             <div class="col-6 col-lg-3">
               <article class="pcard" style="--i:{{ $index }}">
                 <div class="art">
-                  @if ($produto->imagem)
-<img src="{{ $produto->imagem }}" alt="{{ $produto->nome }}" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;">                  @else
-                    <div class="d-flex align-items-center justify-content-center h-100 text-muted">
-                      Sem foto
-                    </div>
-                  @endif
-                  <span class="tag">Destaque</span>
-                </div>
+  @if ($produto->imagem)
+    <img src="{{ $produto->imagem }}" alt="{{ $produto->nome }}" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;">
+  @else
+    <div class="d-flex align-items-center justify-content-center h-100 text-muted">
+      Sem foto
+    </div>
+  @endif
+  <span class="tag">Destaque</span>
+</div>
 
                 <div class="pbody">
                   <h3 class="pname h5 mb-1">{{ $produto->nome }}</h3>

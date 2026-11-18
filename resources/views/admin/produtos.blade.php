@@ -285,12 +285,13 @@
                   <tr style="{{ !$produto->ativo ? 'opacity: 0.7;' : '' }}">
                     <td class="ps-4">
                       <div class="d-flex align-items-center gap-3">
-                        @if ($produto->imagem)
-                                <img src="{{ $produto->imagem }}" alt="{{ $produto->nome }}" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;">                         @else
-                          <div class="d-flex align-items-center justify-content-center" style="width: 52px; height: 52px; border-radius: 10px; font-size: .75rem; background: rgba(229, 158, 0, 0.15);">
-                            Sem foto
-                          </div>
-                        @endif
+                       @if ($produto->imagem)
+  <img src="{{ $produto->imagem }}" alt="{{ $produto->nome }}" style="width: 52px; height: 52px; object-fit: cover; border-radius: 10px;">
+@else
+  <div class="d-flex align-items-center justify-content-center" style="width: 52px; height: 52px; border-radius: 10px; font-size: .75rem; background: rgba(229, 158, 0, 0.15);">
+    Sem foto
+  </div>
+@endif
                         <div>
                           <strong class="d-block">{{ $produto->nome }}</strong>
                           <span class="small prod-desc text-truncate d-inline-block" style="max-width: 240px;">{{ $produto->descricao }}</span>
