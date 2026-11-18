@@ -130,7 +130,7 @@
           </div>
 
           <div class="d-grid gap-2">
-            <a class="btn btn-honey btn-lg" target="_blank" rel="noopener" href="{{ $pedidoPronto['waUrl'] }}">
+            <a class="btn btn-honey btn-lg" target="_blank" rel="noopener" href="{{ $pedidoPronto['waLink'] }}">
               <span data-i="chat"></span> Enviar pedido pelo WhatsApp
             </a>
             <a class="btn btn-line" href="{{ route('produtos') }}">Voltar aos produtos</a>
