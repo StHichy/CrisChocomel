@@ -483,14 +483,14 @@
         <!-- Espaço para a imagem personalizada -->
         <div class="col-lg-5 rv">
           <div class="position-relative overflow-hidden rounded-4 shadow-sm" style="border: 3px solid rgba(229,158,0,0.3);">
-            <img src="{{ asset('img/foto-atelie.jpg') }}" alt="Ateliê Cris Chocomel" class="img-fluid w-100" style="object-fit: cover; height: 380px;">
+            <img src="{{ asset('/foto-atelie.jpg') }}" alt="Ateliê Cris Chocomel" class="img-fluid w-100" style="object-fit: cover; height: 380px;">
           </div>
         </div>
 
         <div class="col-lg-7 rv">
           <span class="eyebrow">Confeitaria afetiva</span>
-          <h2 class="mt-2 mb-3">Mel de verdade, lotes pequenos, zero pressa</h2>
-          <p class="lead-s">Enquanto a indústria busca baratear custos com conservantes e gorduras hidrogenadas, a Cris Chocomel escolheu mel de abelha puro, doce de leite cozido com paciência e chocolate nobre que derrete aveludado.</p>
+          <h2 class="mt-2 mb-3">Produtos de qualidade produzidos com amor</h2>
+          <p class="lead-s">Enquanto a indústria busca baratear custos com conservantes e gorduras hidrogenadas, a Cris Chocomel escolheu produtos de qualidade tudo feito de forma artesanal para nossos clientes</p>
           <a class="btn btn-solid mt-2" href="{{ route('sobre') }}">Ler a nossa história <span data-i="arrow"></span></a>
         </div>
       </div>
