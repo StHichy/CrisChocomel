@@ -6,7 +6,8 @@
 <title>Cris Chocomel</title>
 <meta name="description" content="Doceria artesanal: pães de mel, brigadeiros gourmet, cones trufados e caixas de presente.">
 <link rel="icon" type="image/png" href="/favo-de-mel.png?v=3">
-<link rel="shortcut icon" type="image/png" href="/favo-de-mel.png?v=3"><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="shortcut icon" type="image/png" href="/favo-de-mel.png?v=3">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
@@ -35,7 +36,6 @@
     justify-content: flex-start;
   }
 
-  /* Centraliza automaticamente quando houver até 4 categorias no desktop */
   @media (min-width: 992px) {
     .cat-carousel-track:not(:has(.cat-carousel-item:nth-child(5))) {
       justify-content: center;
@@ -113,7 +113,6 @@
     color: #fbbf24;
   }
 
-  /* Ícones maiores, encorpados e nítidos */
   .cat-carousel-item .cat-ic {
     width: 68px;
     height: 68px;
@@ -266,7 +265,7 @@
         <div class="col-lg-7">
           <span class="pill word" style="animation-delay:.05s"><span id="pillIcon"></span> Doces feitos com amor</span>
           <h1 class="mt-3 mb-4" id="heroTitle">Doces artesanais que adoçam os seus <em>melhores momentos</em></h1>
-          <p class="lead-s mb-4 word" style="animation-delay:.7s">Produtos feitos com ingredientes de alta qualidade e com muito amor pela as mãos da CrisChocomel</p>
+          <p class="lead-s mb-4 word" style="animation-delay:.7s">Produtos feitos com ingredientes de alta qualidade e com muito amor pelas mãos da Cris Chocomel</p>
           <div class="d-flex flex-wrap gap-3 mb-5 word" style="animation-delay:.85s">
             <a class="btn btn-honey btn-lg" href="{{ route('produtos') }}">Explorar produtos <span data-i="arrow"></span></a>
             <a class="btn btn-hero-line btn-lg" href="{{ route('sobre') }}">Conhecer a Cris</a>
@@ -277,16 +276,17 @@
             <div><strong>Fresquinho</strong>Lotes pequenos</div>
           </div>
         </div>
-        <div class="col-lg-5">
-          <div class="scene" id="scene" aria-hidden="true">
-            <div class="hexa"></div><div class="hexb"></div>
-            <div class="main" data-depth="14" id="sceneMain"></div>
-            <div class="s1" data-depth="-22" id="sceneS1"></div>
-            <div class="s2" data-depth="22" id="sceneS2"></div>
-            <svg class="stamp" viewBox="0 0 100 100"><circle class="disc" cx="50" cy="50" r="49"/><defs><path id="circ" d="M50 50m-36 0a36 36 0 1 1 72 0a36 36 0 1 1-72 0"/></defs><text><textPath href="#circ" textLength="222" lengthAdjust="spacing">Cris Chocomel · feito à mão · </textPath></text><path d="M50 36l11 6.5v13L50 62l-11-6.5v-13z" fill="#E59E00"/></svg>
+        
+        <!-- Personagem isolada substituindo a animação antiga -->
+        <div class="col-lg-5 text-center">
+          <div class="position-relative d-inline-block w-100" style="max-width: 440px;">
+            <img src="{{ asset('/cris-personagem.png') }}" alt="Cris Chocomel" class="img-fluid rounded-4 shadow-lg" style="border: 3px solid rgba(229,158,0,0.4);">
           </div>
         </div>
+
       </div>
+
+      <!-- Abelhas originais mantidas voando -->
       <svg class="bee" style="top:5%;left:64%" viewBox="0 0 46 40" aria-hidden="true"><ellipse class="wing" cx="17" cy="9" rx="8" ry="10" fill="#FFF4DC" opacity=".85" transform="rotate(-20 17 9)"/><ellipse class="wing" cx="29" cy="9" rx="8" ry="10" fill="#FFF4DC" opacity=".85" transform="rotate(20 29 9)"/><ellipse cx="23" cy="26" rx="15" ry="11" fill="#E59E00"/><path d="M17 16v20M24 15v22M31 16v20" stroke="#2C1708" stroke-width="4"/><circle cx="35" cy="22" r="1.8" fill="#2C1708"/></svg>
       <svg class="bee b2" style="top:80%;left:50%" viewBox="0 0 46 40" aria-hidden="true"><ellipse class="wing" cx="17" cy="9" rx="8" ry="10" fill="#FFF4DC" opacity=".85" transform="rotate(-20 17 9)"/><ellipse class="wing" cx="29" cy="9" rx="8" ry="10" fill="#FFF4DC" opacity=".85" transform="rotate(20 29 9)"/><ellipse cx="23" cy="26" rx="15" ry="11" fill="#E59E00"/><path d="M17 16v20M24 15v22M31 16v20" stroke="#2C1708" stroke-width="4"/><circle cx="35" cy="22" r="1.8" fill="#2C1708"/></svg>
     </div>
@@ -311,15 +311,15 @@
             <div class="col-6 col-lg-3">
               <article class="pcard" style="--i:{{ $index }}">
                 <div class="art">
-  @if ($produto->imagem)
-    <img src="{{ $produto->imagem }}" alt="{{ $produto->nome }}" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;">
-  @else
-    <div class="d-flex align-items-center justify-content-center h-100 text-muted">
-      Sem foto
-    </div>
-  @endif
-  <span class="tag">Destaque</span>
-</div>
+                  @if ($produto->imagem)
+                    <img src="{{ $produto->imagem }}" alt="{{ $produto->nome }}" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;">
+                  @else
+                    <div class="d-flex align-items-center justify-content-center h-100 text-muted">
+                      Sem foto
+                    </div>
+                  @endif
+                  <span class="tag">Destaque</span>
+                </div>
 
                 <div class="pbody">
                   <h3 class="pname h5 mb-1">{{ $produto->nome }}</h3>
@@ -377,16 +377,13 @@
                     <div class="cat-ic" aria-hidden="true">
                       @switch($cat->slug)
                         @case('pao')
-                          {{-- Pão de Mel com calda de chocolate --}}
                           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M4 14.5C4 9.8 7.6 6 12 6s8 3.8 8 8.5v2A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5v-2Z" fill="currentColor" fill-opacity="0.22"/>
                             <path d="M4.5 13c1.5 1.4 3 1.4 4.5 0s3-1.4 4.5 0 3 1.4 4.5 0c.7-.6 1.1-.8 1.5-.8"/>
                             <path d="M9 10.2h.01M15 10.2h.01M12 9h.01" stroke-width="2.2"/>
                           </svg>
                           @break
-
                         @case('brigadeiro')
-                          {{-- Brigadeiro Gourmet na forminha plissada --}}
                           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="10" r="5.5" fill="currentColor" fill-opacity="0.24"/>
                             <path d="M6 14.5l1.6 5.5h8.8L18 14.5" fill="currentColor" fill-opacity="0.12"/>
@@ -394,18 +391,14 @@
                             <path d="M10 8.5l1.2 1.2M13.8 8l-.8 1.5M11.5 11.8h1.5" stroke-width="1.9"/>
                           </svg>
                           @break
-
                         @case('cone')
-                          {{-- Cone Trufado crocante --}}
                           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M7.5 10.5L12 21l4.5-10.5" fill="currentColor" fill-opacity="0.22"/>
                             <path d="M6.5 10.5C6.5 7.4 9 5 12 5s5.5 2.4 5.5 5.5c0 .8-.7 1.5-1.5 1.5H8c-.8 0-1.5-.7-1.5-1.5Z" fill="currentColor" fill-opacity="0.12"/>
                             <path d="M9.2 14.5h5.6M10.6 17.8h2.8"/>
                           </svg>
                           @break
-
                         @case('caixa')
-                          {{-- Caixa de Presente com laço --}}
                           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="4" y="10" width="16" height="10" rx="2" fill="currentColor" fill-opacity="0.22"/>
                             <rect x="3" y="7" width="18" height="3" rx="1" fill="currentColor" fill-opacity="0.14"/>
@@ -413,9 +406,7 @@
                             <path d="M12 7c-1.8-2.8-5-2.8-5 0s3.2 0 5 0Zm0 0c1.8-2.8 5-2.8 5 0s-3.2 0-5 0Z"/>
                           </svg>
                           @break
-
                         @default
-                          {{-- Favo de Mel (padrão para novas categorias) --}}
                           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 3l7.5 4.3v8.6L12 20.2l-7.5-4.3V7.3L12 3Z" fill="currentColor" fill-opacity="0.22"/>
                             <path d="M12 7.5l3.8 2.2v4.4L12 16.3l-3.8-2.2V9.7L12 7.5Z" fill="currentColor" fill-opacity="0.25"/>
