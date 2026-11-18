@@ -263,9 +263,9 @@
     <div class="container position-relative" style="z-index:2">
       <div class="row align-items-center g-5">
         <div class="col-lg-7">
-          <span class="pill word" style="animation-delay:.05s"><span id="pillIcon"></span> Doces feitos com amor e mel puro</span>
+          <span class="pill word" style="animation-delay:.05s"><span id="pillIcon"></span> Doces feitos com amor</span>
           <h1 class="mt-3 mb-4" id="heroTitle">Doces artesanais que adoçam os seus <em>melhores momentos</em></h1>
-          <p class="lead-s mb-4 word" style="animation-delay:.7s">Pães de mel trufados, cones crocantes de chocolate nobre e caixas de presente montadas com carinho, direto do ateliê da Cris.</p>
+          <p class="lead-s mb-4 word" style="animation-delay:.7s">Produtos feitos com ingredientes de alta qualidade e com muito amor pela as mãos da CrisChocomel</p>
           <div class="d-flex flex-wrap gap-3 mb-5 word" style="animation-delay:.85s">
             <a class="btn btn-honey btn-lg" href="{{ route('produtos') }}">Explorar produtos <span data-i="arrow"></span></a>
             <a class="btn btn-hero-line btn-lg" href="{{ route('sobre') }}">Conhecer a Cris</a>
