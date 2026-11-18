@@ -185,8 +185,7 @@
                 <label for="imagem" class="form-label fw-semibold">Foto do Produto</label>
                 @if ($produto->imagem)
                     <div class="mb-2">
-                        <img src="{{ asset($produto->imagem) }}" alt="{{ $produto->nome }}" style="height: 80px; border-radius: 10px; object-fit: cover;">
-                        <span class="small muted ms-2">Foto atual (envie outra apenas se quiser trocar)</span>
+<img src="{{ $produto->imagem }}" alt="{{ $produto->nome }}" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;">                        <span class="small muted ms-2">Foto atual (envie outra apenas se quiser trocar)</span>
                     </div>
                 @endif
                 <input 

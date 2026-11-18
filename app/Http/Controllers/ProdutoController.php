@@ -3,80 +3,81 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produto;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use App\Models\Categoria;
+use Illuminate\Support\Facades\Storage;
 
 class ProdutoController extends Controller
 {
     // Vitrine Home (apenas ativos e em destaque)
     public function home()
-{
-    $produtosDestaque = Produto::where('ativo', true)
-        ->where('destaque', true)
-        ->get();
+    {
+        $produtosDestaque = Produto::where('ativo', true)
+            ->where('destaque', true)
+            ->get();
 
-    $categorias = Categoria::orderBy('nome')->get();
+        $categorias = Categoria::orderBy('nome')->get();
 
-    return view('index', compact('produtosDestaque', 'categorias'));
-}
+        return view('index', compact('produtosDestaque', 'categorias'));
+    }
+
     // Vitrine Pública de Produtos (apenas ativos)
     public function index(Request $request)
-{
-    $query = Produto::where('ativo', true);
+    {
+        $query = Produto::where('ativo', true);
 
-    if ($request->filled('categoria')) {
-        $query->where('categoria', $request->categoria);
+        if ($request->filled('categoria')) {
+            $query->where('categoria', $request->categoria);
+        }
+
+        if ($request->filled('busca')) {
+            $busca = $request->busca;
+            $query->where(function ($q) use ($busca) {
+                $q->where('nome', 'like', "%{$busca}%")
+                  ->orWhere('descricao', 'like', "%{$busca}%");
+            });
+        }
+
+        switch ($request->ordem) {
+            case 'asc':  $query->orderBy('preco', 'asc'); break;
+            case 'desc': $query->orderBy('preco', 'desc'); break;
+            case 'az':   $query->orderBy('nome', 'asc'); break;
+            default:     $query->orderBy('destaque', 'desc')->latest(); break;
+        }
+
+        $produtos = $query->get();
+        $categorias = Categoria::orderBy('nome')->get();
+
+        return view('produtos', compact('produtos', 'categorias'));
     }
-
-    if ($request->filled('busca')) {
-        $busca = $request->busca;
-        $query->where(function ($q) use ($busca) {
-            $q->where('nome', 'like', "%{$busca}%")
-              ->orWhere('descricao', 'like', "%{$busca}%");
-        });
-    }
-
-    switch ($request->ordem) {
-        case 'asc':  $query->orderBy('preco', 'asc'); break;
-        case 'desc': $query->orderBy('preco', 'desc'); break;
-        case 'az':   $query->orderBy('nome', 'asc'); break;
-        default:     $query->orderBy('destaque', 'desc')->latest(); break;
-    }
-
-    $produtos = $query->get();
-    $categorias = Categoria::orderBy('nome')->get();
-
-    return view('produtos', compact('produtos', 'categorias'));
-}
 
     // Painel exclusivo do Admin (mostra ATIVOS e INATIVOS)
-   public function adminIndex(Request $request)
-{
-    $query = Produto::query();
+    public function adminIndex(Request $request)
+    {
+        $query = Produto::query();
 
-    if ($request->status === 'ativos') {
-        $query->where('ativo', true);
-    } elseif ($request->status === 'inativos') {
-        $query->where('ativo', false);
+        if ($request->status === 'ativos') {
+            $query->where('ativo', true);
+        } elseif ($request->status === 'inativos') {
+            $query->where('ativo', false);
+        }
+
+        if ($request->filled('busca')) {
+            $query->where('nome', 'like', "%{$request->busca}%");
+        }
+
+        $produtos = $query->orderBy('ativo', 'desc')->latest()->get();
+        $categorias = Categoria::orderBy('nome')->get();
+
+        return view('admin.produtos', compact('produtos', 'categorias'));
     }
-
-    if ($request->filled('busca')) {
-        $query->where('nome', 'like', "%{$request->busca}%");
-    }
-
-    $produtos = $query->orderBy('ativo', 'desc')->latest()->get();
-    $categorias = Categoria::orderBy('nome')->get();
-
-    return view('admin.produtos', compact('produtos', 'categorias'));
-}
-   
 
     public function create()
-{
-    $categorias = Categoria::orderBy('nome')->get();
-    return view('produtos-create', compact('categorias'));
-}
+    {
+        $categorias = Categoria::orderBy('nome')->get();
+        return view('produtos-create', compact('categorias'));
+    }
 
     public function store(Request $request)
     {
@@ -89,21 +90,15 @@ class ProdutoController extends Controller
         ]);
 
         if ($request->hasFile('imagem')) {
-    // Apaga a imagem antiga ao editar, se existir
-    if (isset($produto) && $produto->imagem) {
-        $caminhoAntigo = public_path($produto->imagem);
-        if (File::exists($caminhoAntigo)) {
-            File::delete($caminhoAntigo);
+            // Salva diretamente no bucket do Supabase Storage
+            $path = $request->file('imagem')->store('produtos', 's3');
+            
+            // Atribui a URL pública gerada pelo Supabase ao array de dados
+            $dados['imagem'] = Storage::disk('s3')->url($path);
         }
-    }
-
-    // Salva em storage/app/public/produtos e retorna 'produtos/arquivo.jpg'
-    $caminho = $request->file('imagem')->store('produtos', 'public');
-    $dados['imagem'] = 'storage/' . $caminho;
-}
 
         $dados['destaque'] = $request->has('destaque');
-        $dados['ativo'] = $request->has('ativo') ? true : true; // Ativo por padrão ao criar
+        $dados['ativo'] = true; // Ativo por padrão ao criar
 
         Produto::create($dados);
 
@@ -111,11 +106,11 @@ class ProdutoController extends Controller
     }
 
     public function edit($id)
-{
-    $produto = Produto::findOrFail($id);
-    $categorias = Categoria::orderBy('nome')->get();
-    return view('produtos-edit', compact('produto', 'categorias'));
-}
+    {
+        $produto = Produto::findOrFail($id);
+        $categorias = Categoria::orderBy('nome')->get();
+        return view('produtos-edit', compact('produto', 'categorias'));
+    }
 
     public function update(Request $request, $id)
     {
@@ -130,18 +125,12 @@ class ProdutoController extends Controller
         ]);
 
         if ($request->hasFile('imagem')) {
-    // Apaga a imagem antiga ao editar, se existir
-    if (isset($produto) && $produto->imagem) {
-        $caminhoAntigo = public_path($produto->imagem);
-        if (File::exists($caminhoAntigo)) {
-            File::delete($caminhoAntigo);
+            // Salva diretamente no bucket do Supabase Storage
+            $path = $request->file('imagem')->store('produtos', 's3');
+            
+            // Atribui a URL pública gerada ao array de dados
+            $dados['imagem'] = Storage::disk('s3')->url($path);
         }
-    }
-
-    // Salva em storage/app/public/produtos e retorna 'produtos/arquivo.jpg'
-    $caminho = $request->file('imagem')->store('produtos', 'public');
-    $dados['imagem'] = 'storage/' . $caminho;
-}
 
         $dados['destaque'] = $request->has('destaque');
         $dados['ativo'] = $request->has('ativo');
@@ -155,15 +144,15 @@ class ProdutoController extends Controller
     {
         $produto = Produto::findOrFail($id);
 
-        if ($produto->imagem && File::exists(public_path($produto->imagem))) {
-            File::delete(public_path($produto->imagem));
-        }
+        // Como agora usamos Supabase Storage, a remoção local antiga foi ignorada. 
+        // Se quiser deletar do Supabase, você pode usar Storage::disk('s3')->delete(...) opcionalmente.
 
         $produto->delete();
 
         return redirect()->route('admin.produtos')->with('success', 'Produto excluído com sucesso!');
     }
-     public function toggleAtivo($id)
+
+    public function toggleAtivo($id)
     {
         $produto = Produto::findOrFail($id);
         $produto->ativo = !$produto->ativo;

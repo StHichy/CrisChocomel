@@ -311,8 +311,7 @@
               <article class="pcard" style="--i:{{ $index }}">
                 <div class="art">
                   @if ($produto->imagem)
-                    <img src="{{ asset($produto->imagem) }}" alt="{{ $produto->nome }}" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;">
-                  @else
+<img src="{{ $produto->imagem }}" alt="{{ $produto->nome }}" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;">                  @else
                     <div class="d-flex align-items-center justify-content-center h-100 text-muted">
                       Sem foto
                     </div>
@@ -333,7 +332,7 @@
                       data-url="{{ route('carrinho.adicionar', $produto->id) }}"
                       data-nome="{{ $produto->nome }}"
                       data-preco="{{ $produto->preco }}"
-                      data-imagem="{{ $produto->imagem ? asset($produto->imagem) : '' }}"
+                      data-imagem="{{ $produto->imagem }}"
                     >
                       <span data-i="plus"></span> Sacola
                     </button>
